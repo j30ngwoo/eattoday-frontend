@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom"
 import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
-
+import Modal from 'react-modal';
 
 export default function Login() {
 	const navigate = useNavigate();
-	const [id, setId] = useState("");
+	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 	const [isSent, setIsSent] = useState(false);
-	const idPwRef = useRef(null);
+	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
 	const buttonRef = useRef(null);
 
-	const sendServerToLogin = (id, pw) => {
+	const sendServerToLogin = (email, pw) => {
 		// 전송 할 것!
 		// axios.send(id, pw);
 		// https://eat-today.com/api/login
@@ -22,11 +22,40 @@ export default function Login() {
 		// axios.post(url, {id, pw});
 		// response => 받아
 		// 그걸로 로그인 시켜주면됨!
-		console.log(id, pw);
+		console.log(email, pw);
+	}
+
+	const loginButtonProcess = (email, pw) => {
+		if (checkEmail(email) && checkPW(pw)) {
+			sendServerToLogin(email, pw);
+			navigate('/result');
+		}
+	}
+
+	const checkEmail = (email) => {
+		const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}$/;
+		console.log('emailTest=', regExp.test(email)); //test
+
+		if (regExp.test(email)) {
+			return (true);
+		} else {
+			
+		}
+	}
+
+	const checkPW = (pw) => {
+		const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,10}$/;
+		console.log('pwTest=', regExp.test(pw)); //test
+
+		if (regExp.test(pw)) {
+			return (true);
+		} else {
+			
+		}
 	}
 
 	useEffect(() => {
-		const chars = new SplitType(idPwRef.current).chars;
+		const chars = new SplitType(emailPwRef.current).chars;
 		console.log(chars);
 		if (chars) {
 			gsap.fromTo(chars, {
@@ -60,21 +89,10 @@ export default function Login() {
 				scale: 1,
 			}, 
 			{
-				scale: 1.05,
+				scale: 1.018,
 				repeat: -1,
 				yoyo: true,
 				delay: 1,
-			})
-
-		gsap.fromTo('.clickMe', 
-			{
-				scale: 1,
-			}, 
-			{
-				scale: 1.2,
-				repeat: -1,
-				yoyo: true,
-				delay: 1.2,
 			})
 		}
 	}, [])
@@ -82,22 +100,18 @@ export default function Login() {
 	return (
 		<div className="container">
 			<div className="page" ref={pageRef}>
-				<div className="titleWrap" ref={idPwRef}>
+				<div className="titleWrap" ref={emailPwRef}>
 					아이디와 비밀번호를
 					<br/>
 					입력해주세요
 				</div>
-				<div>아이디를 입력해주세요~</div>
-				<Input size="md" placehoder="ID" value={id} onChange={(val) => setId(val.target.value)}/>
-				<div>비밀번호를 입력해주세요~</div>
-				<Input size="md" placehoder="PW" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
+				<div>아이디를 입력해주세요</div>
+				<Input size="md" placehoder="E-mail" value={email} onChange={(val) => setEmail(val.target.value)}/>
+				<div>비밀번호를 입력해주세요</div>
+				<Input size="md" placehoder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
 				<Button ref={buttonRef} onClick={() => {
-					// API 요청을 하는거지~ id랑 비밀번호 서버한테 보내고 응답 받기~!
-					sendServerToLogin(id, pw);
-				}}>가짜 전송~</Button>
-				<p className="clickMe">👆~이건 누르지마~👆</p>
-				<Button ref={buttonRef} onClick={() => navigate('/result')}>전송~</Button>
-				<p className="clickMe">👆~눌러줘~👆</p>
+					loginButtonProcess(email, pw);
+				}}>Login</Button>
 			</div>
 		</div>
 	)
