@@ -120,7 +120,7 @@ export default function Login() {
 				}}/>
 				<div className="loginValidationMessage">{emailValidationMessage}</div>
 				<div>비밀번호를 입력해주세요</div>
-				<Input size="md" placeholder="Password" type="password" value={pw} style={margin-bottom= onChange={(val) => setPw(val.target.value)}/>
+				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
 				<div>{pwValidationMessage}</div>
 				<Button ref={buttonRef} onClick={() => {
 					checkEmail(email);
