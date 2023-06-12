@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './Login';
+import Login from './page/Login';
 import Result from './Result';
 import Flicking from './Flicking';
 import './index.css';
-import Register from 'Register';
+import Register from './page/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
