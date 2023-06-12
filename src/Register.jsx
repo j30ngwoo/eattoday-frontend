@@ -12,8 +12,12 @@ export default function Register() {
 	const [pwConfirm, setPwConfirm] = useState("");
 	
 	const [emailValidation, setEmailValidation] = useState(false);
-	const [pwValidation, setpwValidation] = useState(false);
-	const [pwConfirmValidation, setConfirmValidation] = useState(false);
+	const [pwValidation, setPwValidation] = useState(false);
+	const [pwConfirmValidation, setPwConfirmValidation] = useState(false);
+
+	const [emailValidationMessage, setEmailValidationMessage] = useState(" ");
+	const [pwValidationMessage, setPwValidationMessage] = useState(" ");
+	const [pwConfirmValidationMessage, setPwConfirmValidationMessage] = useState(" ");
 
 	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
@@ -32,31 +36,46 @@ export default function Register() {
 	}
 
 	const registerButtonProcess = (email, pw) => {
-		if (checkEmail(email) && checkPW(pw)) {
-			sendServerToRegister(email, pw);
-			navigate('/result');
-		}
+		sendServerToRegister(email, pw);
 	}
 
 	const checkEmail = (email) => {
 		const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}$/;
-		console.log('emailTest=', regExp.test(email)); //test
-
 		if (regExp.test(email)) {
-			return (true);
+			setEmailValidation(true);
+			setEmailValidationMessage(" ");
 		} else {
-			
+			setEmailValidation(false);
+			setEmailValidationMessage("올바른 이메일 주소를 입력해주세요.");
 		}
 	}
 
-	const checkPW = (pw) => {
-		const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,10}$/;
+	const checkPw = (pw) => {
+		const regExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
 		console.log('pwTest=', regExp.test(pw)); //test
-
 		if (regExp.test(pw)) {
-			return (true);
+			setPwValidation(true);
+			setPwValidationMessage(" ");
 		} else {
-			
+			setPwValidation(false);
+			setPwValidationMessage("패스워드는 8자리 이상, 알파벳, 숫자를 포함하여야 합니다.");
+		}
+		if (pw === pwConfirm) {
+			setPwConfirmValidation(true);
+			setPwConfirmValidationMessage(" ");
+		} else if (pwConfirm.length > 0) {
+			setPwConfirmValidation(false);
+			setPwConfirmValidationMessage("패스워드가 일치하지 않습니다.");
+		}
+	}
+
+	const checkPwConfirm = (pwConfirm) => {
+		if (pw === pwConfirm) {
+			setPwConfirmValidation(true);
+			setPwConfirmValidationMessage(" ");
+		} else {
+			setPwConfirmValidation(false);
+			setPwConfirmValidationMessage("패스워드가 일치하지 않습니다.");
 		}
 	}
 
@@ -113,15 +132,30 @@ export default function Register() {
 					환영합니다!
 				</div>
 				<div>이메일</div>
-				<Input size="md" placeholder="E-mail" value={email} onChange={(val) => setEmail(val.target.value)}/>
-				<div>비밀번호</div>	
-				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
+				<Input size="md" placeholder="E-mail" value={email} onChange={(val) => {
+					const currentEmail = val.target.value;
+					setEmail(currentEmail);
+					checkEmail(currentEmail);
+				}}/>
+				<div className="registerValidationMessage">{emailValidationMessage}</div>
+				<div>비밀번호</div>
+				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => {
+					const currentPw = val.target.value;
+					setPw(currentPw);
+					checkPw(currentPw);
+				}}/>
+				<div className="registerValidationMessage">{pwValidationMessage}</div>
 				<div>비밀번호 확인!</div>
-				<Input size="md" placeholder="Confirm Password" type="password" value={pwConfirm} onChange={(val) => setPwConfirm(val.target.value)}/>
+				<Input size="md" placeholder="Confirm Password" type="password" value={pwConfirm} onChange={(val) => {
+					const currentPwConfirm = val.target.value;
+					setPwConfirm(currentPwConfirm);
+					checkPwConfirm(currentPwConfirm);
+				}}/>
+				<div className="registerValidationMessage">{pwConfirmValidationMessage}</div>
 				<Button ref={buttonRef} onClick={() => {
 					registerButtonProcess(email, pw);
 				}}>Register</Button>
 			</div>
 		</div>
 	)
-} 	
+}

@@ -53,9 +53,12 @@
 	cursor: pointer;
 }
 
-.loginValidationMessage {
-	margin-top: 0%;
+.registerValidationMessage {
 	font-size: 0.7rem;
 	margin-left: auto;
 	color: crimson;
+}
+
+.buttonDisable {
+	disabled: 'disabled';
 }
