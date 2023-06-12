@@ -5,33 +5,30 @@ import { gsap } from "gsap";
 import SplitType from "split-type";
 import Modal from 'react-modal';
 
-export default function Login() {
+export default function Register() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
+	const [pwConfirm, setPwConfirm] = useState("");
 	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
 	const buttonRef = useRef(null);
 
-	const emailUnvalidateModal = () => {
-
-	}
-
-	const sendServerToLogin = (email, pw) => {
+	const sendServerToRegister = (email, pw) => {
 		// 전송 할 것!
 		// axios.send(id, pw);
-		// https://eat-today.com/api/login
+		// https://eat-today.com/api/register
 		// const url = ////,,,,
 		// axios.post(url, {id, pw});
 		// response => 받아
 		// 그걸로 로그인 시켜주면됨!
-		console.log(email, pw);
+		console.log('send to server: ', email, pw);
 	}
 
-	const loginButtonProcess = (email, pw) => {
+	const registerButtonProcess = (email, pw) => {
 		if (checkEmail(email) && checkPW(pw)) {
-			sendServerToLogin(email, pw);
+			sendServerToRegister(email, pw);
 			navigate('/result');
 		}
 	}
@@ -43,7 +40,7 @@ export default function Login() {
 		if (regExp.test(email)) {
 			return (true);
 		} else {
-			emailUnvalidateModal();
+			
 		}
 	}
 
@@ -105,18 +102,20 @@ export default function Login() {
 		<div className="container">
 			<div className="page" ref={pageRef}>
 				<div className="titleWrap" ref={emailPwRef}>
-					아이디와 비밀번호를
+					회원가입🙂
 					<br/>
-					입력해주세요
+					환영합니다!
 				</div>
-				<div>아이디를 입력해주세요</div>
+				<div>이메일</div>
 				<Input size="md" placeholder="E-mail" value={email} onChange={(val) => setEmail(val.target.value)}/>
-				<div>비밀번호를 입력해주세요</div>
+				<div>비밀번호</div>
 				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
+				<div>비밀번호 확인!</div>
+				<Input size="md" placeholder="Password Confirm" type="password" value={pwConfirm} onChange={(val) => setPwConfirm(val.target.value)}/>
 				<Button ref={buttonRef} onClick={() => {
-					loginButtonProcess(email, pw);
-				}}>Login</Button>
+					registerButtonProcess(email, pw);
+				}}>Register</Button>
 			</div>
 		</div>
 	)
-}
+} 	
