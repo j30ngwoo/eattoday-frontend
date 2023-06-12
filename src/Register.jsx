@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useAsyncError, useNavigate } from "react-router-dom"
 import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
@@ -10,6 +10,11 @@ export default function Register() {
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 	const [pwConfirm, setPwConfirm] = useState("");
+	
+	const [emailValidation, setEmailValidation] = useState(false);
+	const [pwValidation, setpwValidation] = useState(false);
+	const [pwConfirmValidation, setConfirmValidation] = useState(false);
+
 	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
@@ -103,16 +108,16 @@ export default function Register() {
 			<div className="page" ref={pageRef}>
 				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
 				<div className="registerTitleWrap" ref={emailPwRef}>
-					회원가입🙂
+					회원가입👻
 					<br/>
 					환영합니다!
 				</div>
 				<div>이메일</div>
 				<Input size="md" placeholder="E-mail" value={email} onChange={(val) => setEmail(val.target.value)}/>
-				<div>비밀번호</div>
+				<div>비밀번호</div>	
 				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
 				<div>비밀번호 확인!</div>
-				<Input size="md" placeholder="Password Confirm" type="password" value={pwConfirm} onChange={(val) => setPwConfirm(val.target.value)}/>
+				<Input size="md" placeholder="Confirm Password" type="password" value={pwConfirm} onChange={(val) => setPwConfirm(val.target.value)}/>
 				<Button ref={buttonRef} onClick={() => {
 					registerButtonProcess(email, pw);
 				}}>Register</Button>
