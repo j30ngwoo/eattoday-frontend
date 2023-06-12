@@ -104,7 +104,8 @@ export default function Login() {
 	return (
 		<div className="container">
 			<div className="page" ref={pageRef}>
-				<div className="titleWrap" ref={emailPwRef}>
+				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
+				<div className="loginTitleWrap" ref={emailPwRef}>
 					아이디와 비밀번호를
 					<br/>
 					입력해주세요
@@ -115,7 +116,11 @@ export default function Login() {
 				<Input size="md" placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
 				<Button ref={buttonRef} onClick={() => {
 					loginButtonProcess(email, pw);
-				}}>Login</Button>
+				}}>EatToday!</Button>
+				<center>
+					아직 회원이 아니신가요?&nbsp;
+					<div className="textToRegisterPage" onClick={() => navigate("/register")}>회원가입</div>
+				</center>
 			</div>
 		</div>
 	)

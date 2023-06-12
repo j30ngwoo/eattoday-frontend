@@ -101,7 +101,8 @@ export default function Register() {
 	return (
 		<div className="container">
 			<div className="page" ref={pageRef}>
-				<div className="titleWrap" ref={emailPwRef}>
+				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
+				<div className="registerTitleWrap" ref={emailPwRef}>
 					회원가입🙂
 					<br/>
 					환영합니다!

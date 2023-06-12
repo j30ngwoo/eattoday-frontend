@@ -26,16 +26,29 @@
 	gap: 1rem;
 }
 
-.titleWrap {
-	margin-top: 87px;
+.loginTitleWrap {
+	margin-top: 13%;
 	font-size: 30px;
 	font-weight: 700;
 	color: #262626;
 }
 
-.clickMe {
-	font-size: 2rem;
-	font-weight: 400;
-	text-align: center;
+.registerTitleWrap {
+	margin-top: 5%;
+	font-size: 30px;
+	font-weight: 700;
 	color: #262626;
+}
+
+.textToRegisterPage {
+	text-decoration : underline;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.eatToday {
+	margin-top: 3%;
+	font-size: 2rem;
+	margin-left: auto;
+	cursor: pointer;
 }
