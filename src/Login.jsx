@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom"
 import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
+import axios from 'axios';
 import Modal from 'react-modal';
+
+const loginURL = "http://localhost:8080/auth/login"
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -49,7 +52,7 @@ export default function Login() {
 			{
 				opacity: 1,
 				y: 0,
-				stagger: 0.2,
+				stagger: 0.15,
 			}
 			);
 		}

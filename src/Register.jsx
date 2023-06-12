@@ -3,7 +3,10 @@ import { useAsyncError, useNavigate } from "react-router-dom"
 import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
+import axios from 'axios';
 import Modal from 'react-modal';
+
+const registerURL = "http://localhost:8080/auth/signup"
 
 export default function Register() {
 	const navigate = useNavigate();
@@ -15,9 +18,9 @@ export default function Register() {
 	const [pwValidation, setPwValidation] = useState(false);
 	const [pwConfirmValidation, setPwConfirmValidation] = useState(false);
 
-	const [emailValidationMessage, setEmailValidationMessage] = useState(" ");
-	const [pwValidationMessage, setPwValidationMessage] = useState(" ");
-	const [pwConfirmValidationMessage, setPwConfirmValidationMessage] = useState(" ");
+	const [emailValidationMessage, setEmailValidationMessage] = useState("");
+	const [pwValidationMessage, setPwValidationMessage] = useState("");
+	const [pwConfirmValidationMessage, setPwConfirmValidationMessage] = useState("");
 
 	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
@@ -25,13 +28,12 @@ export default function Register() {
 	const buttonRef = useRef(null);
 
 	const sendServerToRegister = (email, pw) => {
-		// 전송 할 것!
-		// axios.send(id, pw);
-		// https://eat-today.com/api/register
-		// const url = ////,,,,
-		// axios.post(url, {id, pw});
-		// response => 받아
-		// 그걸로 로그인 시켜주면됨!
+		axios.post(registerURL, {
+			"email": {email},
+			"password": {pw}
+		}).then()
+
+
 		console.log('send to server: ', email, pw);
 	}
 
@@ -43,7 +45,7 @@ export default function Register() {
 		const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}$/;
 		if (regExp.test(email)) {
 			setEmailValidation(true);
-			setEmailValidationMessage(" ");
+			setEmailValidationMessage("");
 		} else {
 			setEmailValidation(false);
 			setEmailValidationMessage("올바른 이메일 주소를 입력해주세요.");
@@ -55,14 +57,14 @@ export default function Register() {
 		console.log('pwTest=', regExp.test(pw)); //test
 		if (regExp.test(pw)) {
 			setPwValidation(true);
-			setPwValidationMessage(" ");
+			setPwValidationMessage("");
 		} else {
 			setPwValidation(false);
 			setPwValidationMessage("패스워드는 8자리 이상, 알파벳, 숫자를 포함하여야 합니다.");
 		}
 		if (pw === pwConfirm) {
 			setPwConfirmValidation(true);
-			setPwConfirmValidationMessage(" ");
+			setPwConfirmValidationMessage("");
 		} else if (pwConfirm.length > 0) {
 			setPwConfirmValidation(false);
 			setPwConfirmValidationMessage("패스워드가 일치하지 않습니다.");
@@ -103,7 +105,7 @@ export default function Register() {
 			{
 				opacity: 1,
 				y: 0,
-				stagger: 0.2,
+				stagger: 0.1,
 			}
 			);
 		}
@@ -146,13 +148,13 @@ export default function Register() {
 				}}/>
 				<div className="registerValidationMessage">{pwValidationMessage}</div>
 				<div>비밀번호 확인!</div>
-				<Input size="md" placeholder="Confirm Password" type="password" value={pwConfirm} onChange={(val) => {
+				<Input size="md" placeholder="Confirm Password" type="password" color={pwConfirmValidation ? "neutral":"danger"} value={pwConfirm} onChange={(val) => {
 					const currentPwConfirm = val.target.value;
 					setPwConfirm(currentPwConfirm);
 					checkPwConfirm(currentPwConfirm);
 				}}/>
 				<div className="registerValidationMessage">{pwConfirmValidationMessage}</div>
-				<Button ref={buttonRef} onClick={() => {
+				<Button ref={buttonRef} disabled={!(emailValidation && pwValidation && pwConfirmValidation)} onClick={() => {
 					registerButtonProcess(email, pw);
 				}}>Register</Button>
 			</div>
