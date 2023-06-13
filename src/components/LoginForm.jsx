@@ -16,10 +16,8 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
-		axios.post(loginURL, {
-			"email": JSON.stringify({email}),
-			"password": JSON.stringify({pw})
-		}).then((event) => {
+		axios.post(loginURL, {email, pw}
+			).then((event) => {
       console.log('Login-received', event);
 			//localStorage.setItem("id", event);
       // setLogin(true);
