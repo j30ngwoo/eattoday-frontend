@@ -12,10 +12,7 @@ export default function SelectPreferenceForm(){
 	const navigate = useNavigate();
 	const buttonRef = useRef(null);
 	const buttonHoveringRef = useRef(null);
-	const [isHovering, setIsHovering] = useState('');
-
-	const [email, setEmail] = useState("");
-	const [pw, setPw] = useState("");
+	const [region, setRegion] = useState('');
 
 	const sendPreferenceToServer = (email, pw) => {
 		axios.post(loginURL, {
@@ -60,10 +57,20 @@ export default function SelectPreferenceForm(){
 
 	return (
 		<>
-			<Button color="info"
-				onClick={() => {sendPreferenceToServer();}}
-				onMouseOver={() => {setIsHovering('a'); console.log({isHovering});}}
-			>EatToday!</Button>
+			<RegionButtons>
+				<Button color={region === '한식' ? "info" : "primary"} onClick={() => {setRegion('한식');}}>한식</Button>
+				<Button color={region === '양식' ? "info" : "primary"} onClick={() => {setRegion('양식');}}>양식</Button>
+				<Button color={region === '중식' ? "info" : "primary"} onClick={() => {setRegion('중식');}}>중식</Button>
+				<Button color={region === '일식' ? "info" : "primary"} onClick={() => {setRegion('일식');}}>일식</Button>
+			</RegionButtons>
 		</>
 	)
 }
+
+const RegionButtons = styled.div`
+	*{
+		flex-direction: row;
+		margin-left: 10rem;
+	}
+`
+
