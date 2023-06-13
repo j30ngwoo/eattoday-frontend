@@ -18,16 +18,6 @@ export default function Login() {
 	const pageRef = useRef(null);
 	const buttonRef = useRef(null);
 
-	const sendServerToLogin = () => {
-		
-		console.log(email, pw);
-	}
-
-	const loginButtonProcess = () => {
-		sendServerToLogin();
-		navigate('/result');
-	}
-
 	useEffect(() => {
 		const chars = new SplitType(emailPwRef.current).chars;
 

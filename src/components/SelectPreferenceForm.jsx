@@ -6,16 +6,18 @@ import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 
 
-const loginURL = "http://localhost:8080/" + "auth/login";
+const loginURL = process.env.REACT_APP_API_URL + "auth/login";
 
-export default function LoginForm(){
+export default function SelectPreferenceForm(){
 	const navigate = useNavigate();
 	const buttonRef = useRef(null);
+	const buttonHoveringRef = useRef(null);
+	const [isHovering, setIsHovering] = useState('');
 
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 
-	const sendServerToLogin = (email, pw) => {
+	const sendPreferenceToServer = (email, pw) => {
 		axios.post(loginURL, {
 			"email": {email},
 			"password": {pw}
@@ -43,21 +45,25 @@ export default function LoginForm(){
 				delay: 1,
 			});
 		}
+
+		if (buttonHoveringRef.current) {
+			gsap.fromTo(buttonHoveringRef.current,
+			{
+				scale: 1,
+			}, 
+			{
+				scale: 2,
+				delay: 1,
+			});
+		}
 	}, [])
 
 	return (
 		<>
-			<div>이메일을 입력해주세요</div>
-			<Input placeholder="E-mail" value={email} onChange={(val) => setEmail(val.target.value)}/>
-			<div>비밀번호를 입력해주세요</div>
-			<Input placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
-			<Button ref={buttonRef} onClick={() => {
-				sendServerToLogin();
-			}}>Login!</Button>
-			<center>
-				아직 회원이 아니신가요?&nbsp;
-				<div className="textToRegisterPage" onClick={() => navigate("/register")}>회원가입</div>
-			</center>
+			<Button color="info"
+				onClick={() => {sendPreferenceToServer();}}
+				onMouseOver={() => {setIsHovering('a'); console.log({isHovering});}}
+			>EatToday!</Button>
 		</>
 	)
 }

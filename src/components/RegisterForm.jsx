@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 import { checkEmail, checkPw, checkPwConfirm } from '../utils/validation';
 
+const signupURL = "http://localhost:8080/" + "auth/signup";
+
 export default function RegisterForm(){
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
@@ -14,7 +16,7 @@ export default function RegisterForm(){
 	const [isPwConfirmValidate, setIsPwConfirmValidate] = useState(false);
 
   const sendServerToRegister = (email, pw) => {
-		axios.post(process.env.REACT_APP_API_URL, {
+		axios.post(signupURL, {
 			"email": {email},
 			"password": {pw}
 		}).then((event) => {

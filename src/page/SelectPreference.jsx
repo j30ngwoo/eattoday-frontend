@@ -7,9 +7,10 @@ import { gsap } from "gsap";
 import SplitType from "split-type";
 import axios from 'axios';
 import Modal from 'react-modal';
-import LoginForm from "components/LoginForm";
+import SelectPreferenceForm from "components/SelectPreferenceForm";
+import { styled } from 'styled-components';
 
-export default function Login() {
+export default function SelectPreference() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
@@ -18,16 +19,6 @@ export default function Login() {
 	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
 	const buttonRef = useRef(null);
-
-	const sendServerToLogin = () => {
-		
-		console.log(email, pw);
-	}
-
-	const loginButtonProcess = () => {
-		sendServerToLogin();
-		navigate('/result');
-	}
 
 	useEffect(() => {
 		const chars = new SplitType(emailPwRef.current).chars;
@@ -61,15 +52,30 @@ export default function Login() {
 
 	return (
 		<div className="container">
-			<div className="page" ref={pageRef}>
+			<Page ref={pageRef}>
 				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
 				<div className="loginTitleWrap" ref={emailPwRef}>
-					이메일과 비밀번호를
+					오늘의 선호를
 					<br/>
-					입력해주세요
+					선택해주세요😋
 				</div>
-				<LoginForm />
-			</div>
+				<SelectPreferenceForm />
+			</Page>
 		</div>
 	)
 }
+
+const Page = styled.div`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	max-width: 500px;
+	padding: 0 20px;
+	background-color: #F7F7F7;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+`
