@@ -1,15 +1,33 @@
+
+
 import React, { useState, useRef, useEffect } from "react"
-import { useAsyncError, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
+import axios from 'axios';
 import Modal from 'react-modal';
-import RegisterForm from "components/RegisterForm";
-import { styled } from 'styled-components';
+import LoginForm from "components/LoginForm";
 
-export default function Register() {
+export default function Login() {
 	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [pw, setPw] = useState("");
+
+	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
+	const buttonRef = useRef(null);
+
+	const sendServerToLogin = () => {
+		
+		console.log(email, pw);
+	}
+
+	const loginButtonProcess = () => {
+		sendServerToLogin();
+		navigate('/result');
+	}
 
 	useEffect(() => {
 		const chars = new SplitType(emailPwRef.current).chars;
@@ -26,7 +44,7 @@ export default function Register() {
 			})
 		}
 
-		if (pageRef.current.children) {			
+		if (pageRef.current.children) {	
 			gsap.fromTo(pageRef.current.children, 
 			{
 				opacity: 0,
@@ -35,7 +53,7 @@ export default function Register() {
 			{
 				opacity: 1,
 				y: 0,
-				stagger: 0.1,
+				stagger: 0.15,
 			}
 			);
 		}
@@ -43,30 +61,15 @@ export default function Register() {
 
 	return (
 		<div className="container">
-			<Page ref={pageRef}>
+			<div className="page" ref={pageRef}>
 				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
-				<div className="registerTitleWrap" ref={emailPwRef}>
-					회원가입👻
+				<div className="loginTitleWrap" ref={emailPwRef}>
+					이메일과 비밀번호를
 					<br/>
-					환영합니다!
+					입력해주세요
 				</div>
-        <RegisterForm />
-			</Page>
+				<LoginForm />
+			</div>
 		</div>
 	)
 }
-
-const Page = styled.div`
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	max-width: 500px;
-	padding: 0 20px;
-	background-color: #F7F7F7;
-	overflow: hidden;
-
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-`
