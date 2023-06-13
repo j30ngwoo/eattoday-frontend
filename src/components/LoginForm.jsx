@@ -16,7 +16,7 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
-		axios.post(signupURL, {
+		axios.post(loginURL, {
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
 		}).then((event) => {
