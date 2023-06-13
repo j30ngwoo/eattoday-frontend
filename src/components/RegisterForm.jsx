@@ -19,6 +19,7 @@ export default function RegisterForm(){
 			"password": {pw}
 		}).then((event) => {
       console.log('received', event);
+      
 			//localStorage.setItem("id", event);
       // setLogin(true);
       // setNickname('jeongwoo');
