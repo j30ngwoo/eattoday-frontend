@@ -20,7 +20,7 @@ export default function LoginForm(){
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
 		}).then((event) => {
-      console.log('Login-received', event);
+      console.log('Login-received', event.accessToken);
 			//localStorage.setItem("id", event);
       // setLogin(true);
       // setNickname('jeongwoo');
