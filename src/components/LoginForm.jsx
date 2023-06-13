@@ -20,8 +20,10 @@ export default function LoginForm(){
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
 		}).then((event) => {
-      console.log('Login-received', event.accessToken);
-			//localStorage.setItem("id", event);
+      console.log('Login-received', event.data.accessToken);
+			localStorage.setItem("accessToken", event.data.accessToken);
+			localStorage.setItem("email", email);
+			navigate("/select");
       // setLogin(true);
       // setNickname('jeongwoo');
       // navigate('/home');
@@ -58,6 +60,8 @@ export default function LoginForm(){
 				아직 회원이 아니신가요?&nbsp;
 				<div className="textToRegisterPage" onClick={() => navigate("/register")}>회원가입</div>
 			</center>
+			<Button onClick={() => localStorage.setItem('accessToken', 'a')} />
+			<Button onClick={() => localStorage.removeItem('accessToken')} />
 		</>
 	)
 }

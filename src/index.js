@@ -13,7 +13,7 @@ root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Login />} />
+				<Route path="/" element={localStorage.getItem('accessToken') ? <SelectPreference /> : <Login />} />
 				<Route path="/result" element={<Result />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/flicking" element={<Flicking />} />
