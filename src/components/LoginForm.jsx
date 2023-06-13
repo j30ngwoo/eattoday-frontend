@@ -52,7 +52,7 @@ export default function LoginForm(){
 			<div>비밀번호를 입력해주세요</div>
 			<Input placeholder="Password" type="password" value={pw} onChange={(val) => setPw(val.target.value)}/>
 			<Button ref={buttonRef} onClick={() => {
-				sendServerToLogin();
+				sendServerToLogin(email, pw);
 			}}>Login!</Button>
 			<center>
 				아직 회원이 아니신가요?&nbsp;
