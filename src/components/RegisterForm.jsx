@@ -20,7 +20,7 @@ export default function RegisterForm(){
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
 		}).then((event) => {
-      console.log('received', event.email);
+      console.log('received', event.data.email);
       
 			//localStorage.setItem("id", event);
       // setLogin(true);
