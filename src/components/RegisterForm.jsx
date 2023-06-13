@@ -16,8 +16,8 @@ export default function RegisterForm(){
 	const [isPwConfirmValidate, setIsPwConfirmValidate] = useState(false);
 
   const sendServerToRegister = (email, pw) => {
-		axios.post(signupURL, JSON.stringify({email, pw}), {"Content-Type": 'application/json'})
-    .then((event) => {
+		axios.post(signupURL, JSON.stringify({email, pw})
+    ).then((event) => {
       console.log('received', event);
       
 			//localStorage.setItem("id", event);
