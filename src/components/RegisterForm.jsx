@@ -17,10 +17,7 @@ export default function RegisterForm(){
 
   const sendServerToRegister = (email, pw) => {
 		axios.post(signupURL, {
-      body: JSON.stringify({
-        email: email,
-        password: pw
-		  })
+      email, pw
     }).then((event) => {
       console.log('received', event);
       
