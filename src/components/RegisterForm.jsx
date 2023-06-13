@@ -17,9 +17,11 @@ export default function RegisterForm(){
 
   const sendServerToRegister = (email, pw) => {
 		axios.post(signupURL, {
-			email: JSON.stringify({email}),
-			password: JSON.stringify({pw})
-		}).then((event) => {
+      body: JSON.stringify({
+        email: email,
+        password: pw
+		  })
+    }).then((event) => {
       console.log('received', event);
       
 			//localStorage.setItem("id", event);
