@@ -15,8 +15,8 @@ export default function LoginForm(){
 
 	const sendServerToLogin = (email, pw) => {
 		
-		axios.get(loginURL, {"dummy": "dummy"}
-		).then((event) => {
+		axios.get(loginURL)
+		.then((event) => {
 			console.log(`dummy data sended! ${event}`);
 		}).catch((err) => {
 			console.log(`an error occured: ${err}`);
