@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 import { checkEmail, checkPw, checkPwConfirm } from '../utils/validation';
 
-const signupURL = "http://localhost:8080/" + "auth/signup";
+const signupURL = process.env.REACT_APP_API_URL + "auth/signup";
 
 export default function RegisterForm(){
   const navigate = useNavigate();
