@@ -14,14 +14,14 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
-		/*
+		
 		axios.get(loginURL, {"dummy": "dummy"}
 		).then((event) => {
 			console.log(`dummy data sended! ${event}`);
 		}).catch((err) => {
 			console.log(`an error occured: ${err}`);
 			alert(`로그인 실패🥺. ${err}`);
-		});*/ 
+		});
 
 		axios.post(loginURL, {
 			"email": JSON.stringify({email}),
