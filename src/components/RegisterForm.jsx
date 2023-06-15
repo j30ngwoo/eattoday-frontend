@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import { useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 import { checkEmail, checkPw, checkPwConfirm } from '../utils/validation';
@@ -7,6 +8,7 @@ import { checkEmail, checkPw, checkPwConfirm } from '../utils/validation';
 const signupURL = "http://localhost:8080/" + "auth/signup";
 
 export default function RegisterForm(){
+  const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 	const [pwConfirm, setPwConfirm] = useState("");
@@ -21,13 +23,15 @@ export default function RegisterForm(){
 			"password": JSON.stringify({pw})
 		}).then((event) => {
       console.log('received', event.data.email);
-      
+      alert("회원가입 성공! ", event.data.email);
+      navigate('/login');
 			//localStorage.setItem("id", event);
       // setLogin(true);
       // setNickname('jeongwoo');
       // navigate('/home');
     }).catch((err) => {
 			console.log('an error occured', err);
+      alert("회원가입 실패🥺. Error code:", err);
 		});
 	}
 

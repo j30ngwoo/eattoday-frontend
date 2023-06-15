@@ -51,7 +51,7 @@ export default function Login() {
 	return (
 		<div className="container">
 			<Page ref={pageRef}>
-				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
+				<div className="eatToday">EatToday</div>
 				<div className="loginTitleWrap" ref={emailPwRef}>
 					이메일과 비밀번호를
 					<br/>

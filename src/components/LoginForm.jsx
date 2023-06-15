@@ -29,6 +29,7 @@ export default function LoginForm(){
       // navigate('/home');
     }).catch((err) => {
 			console.log('an error occured', err);
+			alert("로그인 실패🥺. Error code:", err);
 		});
 	}
 

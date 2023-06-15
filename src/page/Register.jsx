@@ -44,7 +44,7 @@ export default function Register() {
 	return (
 		<div className="container">
 			<Page ref={pageRef}>
-				<div className="eatToday" onClick={() => navigate("/")}>EatToday</div>
+				<div className="eatToday" onClick={() => navigate("/login")}>EatToday</div>
 				<div className="registerTitleWrap" ref={emailPwRef}>
 					회원가입👻
 					<br/>
