@@ -8,15 +8,13 @@ import { Button } from "@mui/joy";
 const loginURL = process.env.REACT_APP_API_URL + "auth/login";
 
 export default function SelectPreferenceForm(){
-	const navigate = useNavigate();
 	const buttonRef = useRef(null);
 	const [region, setRegion] = useState('');
 	const [isSpicy, setIsSpicy] = useState('');
 	const [ingredient, setIngredient] = useState('');
 	const [isWarm, setIsWarm] = useState('');
 
-	const SendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
-		useEffect(() => {
+	const sendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
 			axios.post(loginURL, {
 				"preference1": JSON.stringify({region}),
 				"preference2": JSON.stringify({isHot}),
@@ -28,7 +26,6 @@ export default function SelectPreferenceForm(){
 				console.log(`an error occured: ${err}`);
 				alert(`선호 항목 전송 실패🥺. ${err}`);
 			});
-		}, []);
 	}
 
 	useEffect(() => {
