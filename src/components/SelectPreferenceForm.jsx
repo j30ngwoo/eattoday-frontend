@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { styled } from 'styled-components';
 import { gsap } from "gsap";
 import axios from 'axios';
-import { Button } from "@mui/joy";
+import { Divider, Button } from "@mui/joy";
+import RecommendedMenu from "components/RecommendedMenu";
 
 const selectURL = process.env.REACT_APP_API_URL + "preference/input";
 
@@ -13,6 +14,8 @@ export default function SelectPreferenceForm(){
 	const [isSpicy, setIsSpicy] = useState('');
 	const [ingredient, setIngredient] = useState('');
 	const [isWarm, setIsWarm] = useState('');
+	const [isRecommended, setIsRecommended] = useState(false);
+	const [receivedEvent, setReceivedEvent] = useState('');
 
 	const sendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
 			axios.post(selectURL, {
@@ -20,10 +23,9 @@ export default function SelectPreferenceForm(){
 				"preference2": JSON.stringify({isHot}),
 				"preference3": JSON.stringify({ingredient}),
 				"preference4": JSON.stringify({isWarm}),
-			}, {
-				headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
 			}).then((event) => {
 				console.log('preference-received', event.data);
+				setReceivedEvent(event.data);
 			}).catch((err) => {
 				console.log(`an error occured: ${err}`);
 				alert(`선호 항목 전송 실패🥺. ${err}`);
@@ -35,7 +37,7 @@ export default function SelectPreferenceForm(){
 			gsap.fromTo(buttonRef.current,
 			{
 				scale: 1,
-			}, 
+			},
 			{
 				scale: 1.02,
 				repeat: -1,
@@ -69,7 +71,11 @@ export default function SelectPreferenceForm(){
 			</RegionButtons>
 			<Button sx={{ margin: 0.1 }} ref={buttonRef} disabled={!(Boolean(region) && Boolean(isSpicy) && Boolean(ingredient) && Boolean(isWarm))} onClick={() => {
 				sendPreferenceToServer(region, isSpicy, ingredient, isWarm);
+				//setIsRecommended(true); // test
+				//setReceivedEvent({name: "시홍쓰", explanation: "토마토계란덮밥이 맛있는 곳!", link:"https://map.naver.com/v5/entry/place/1494321970?lng=127.07299339764056&lat=37.5461217115568&placePath=%2Fhome&entry=plt&c=15,0,0,0,dh"})
 			}}>Eat Today!</Button>
+			<Divider />
+			{isRecommended && <RecommendedMenu data={receivedEvent} />}
 		</>
 	)
 }
@@ -79,4 +85,3 @@ const RegionButtons = styled.div`
 		flex-direction: row;
 	}
 `
-
