@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import { styled } from 'styled-components';
 import { gsap } from "gsap";
 import axios from 'axios';
@@ -82,9 +81,9 @@ export default function SelectPreferenceForm(){
 				<Button sx={{ width: 150, margin: 1 }} variant={isWarm === '뜨거운 음식' ? "solid" : "soft"} color={isWarm === '뜨거운 음식' ? "success" : "primary"} onClick={() => {setIsWarm('뜨거운 음식');}}>뜨거운 음식🥧</Button>
 			</RegionButtons>
 			<Button sx={{ margin: 0.1 }} ref={buttonRef} disabled={!(Boolean(region) && Boolean(isSpicy) && Boolean(ingredient) && Boolean(isWarm))} onClick={() => {
-				sendPreferenceToServer(region, isSpicy, ingredient, isWarm);
-				//setIsRecommended(true); // test
-				//setReceivedEvent({name: "시홍쓰", explanation: "토마토계란덮밥이 맛있는 곳!", link:"https://map.naver.com/v5/entry/place/1494321970?lng=127.07299339764056&lat=37.5461217115568&placePath=%2Fhome&entry=plt&c=15,0,0,0,dh"})
+				//sendPreferenceToServer(region, isSpicy, ingredient, isWarm);
+				setIsRecommended(true); // test
+				setReceivedEvent({name: "시홍쓰", explanation: "토마토계란덮밥이 맛있는 곳!", link:"https://map.naver.com/v5/entry/place/1494321970?lng=127.07299339764056&lat=37.5461217115568&placePath=%2Fhome&entry=plt&c=15,0,0,0,dh"})
 			}}>Eat Today!</Button>
 			<Divider />
 			{isRecommended && <RecommendedMenu data={receivedEvent} />}
