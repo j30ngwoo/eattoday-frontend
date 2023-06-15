@@ -29,11 +29,6 @@ export default function SelectPreferenceForm(){
 				alert(`선호 항목 전송 실패🥺. ${err}`);
 			});
 		}, []);
-		return (1);
-	}
-
-	const test = () => {
-		return (<h1>Hello</h1>);
 	}
 
 	useEffect(() => {
@@ -74,8 +69,7 @@ export default function SelectPreferenceForm(){
 				<Button sx={{ width: 150, margin: 1 }} variant={isWarm === '뜨거운 음식' ? "solid" : "soft"} color={isWarm === '뜨거운 음식' ? "success" : "primary"} onClick={() => {setIsWarm('뜨거운 음식');}}>뜨거운 음식🥧</Button>
 			</RegionButtons>
 			<Button sx={{ margin: 0.1 }} ref={buttonRef} disabled={!(Boolean(region) && Boolean(isSpicy) && Boolean(ingredient) && Boolean(isWarm))} onClick={() => {
-				//sendPreferenceToServer(region, isSpicy, ingredient, isWarm);
-				test();
+				sendPreferenceToServer(region, isSpicy, ingredient, isWarm);
 			}}>Eat Today!</Button>
 		</>
 	)
