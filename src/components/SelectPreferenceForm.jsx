@@ -22,6 +22,7 @@ export default function SelectPreferenceForm(){
 		axios.get(recommendURL)
 				.then((event) => {
 					setReceivedEvent(event.data);
+					setIsRecommended(true);
 				}).catch((err) => {
 					alert(`추천 항목 수신 실패🥺. ${err}`);
 				});
