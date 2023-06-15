@@ -19,10 +19,10 @@ export default function SelectPreferenceForm(){
 
 	const sendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
 			axios.post(selectURL, {
-				"preference1": JSON.stringify({region}),
-				"preference2": JSON.stringify({isHot}),
-				"preference3": JSON.stringify({ingredient}),
-				"preference4": JSON.stringify({isWarm}),
+				"preference1": 1,
+				"preference2": 2,
+				"preference3": 3,
+				"preference4": 4,
 			}).then((event) => {
 				console.log('preference-received', event.data);
 				setReceivedEvent(event.data);
