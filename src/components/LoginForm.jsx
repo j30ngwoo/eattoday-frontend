@@ -4,7 +4,8 @@ import { gsap } from "gsap";
 import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 
-const loginURL = process.env.REACT_APP_API_URL + "auth/login";
+//const loginURL = process.env.REACT_APP_API_URL + "auth/login";
+const loginURL = "auth/login";
 
 export default function LoginForm(){
 	const navigate = useNavigate();
