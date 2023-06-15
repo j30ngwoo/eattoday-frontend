@@ -27,8 +27,8 @@ export default function SelectPreferenceForm(){
       // setNickname('jeongwoo');
       // navigate('/home');
     }).catch((err) => {
-			console.log('an error occured', err);
-			alert("선호 항목 전송 실패");
+			console.log(`an error occured: ${err}`);
+			alert(`선호 항목 전송 실패🥺. ${err}`);
 		});
 	}
 

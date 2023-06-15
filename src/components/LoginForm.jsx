@@ -28,8 +28,8 @@ export default function LoginForm(){
       // setNickname('jeongwoo');
       // navigate('/home');
     }).catch((err) => {
-			console.log('an error occured', err);
-			alert("로그인 실패🥺. Error code:", err);
+			console.log(`an error occured: ${err}`);
+			alert(`로그인 실패🥺. ${err}`);
 		});
 	}
 

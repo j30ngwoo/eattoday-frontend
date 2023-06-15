@@ -30,8 +30,8 @@ export default function RegisterForm(){
       // setNickname('jeongwoo');
       // navigate('/home');
     }).catch((err) => {
-			console.log('an error occured', err);
-      alert("회원가입 실패🥺. Error code:", err);
+			console.log(`an error occured: ${err}`);
+			alert(`회원가입 실패🥺. ${err}`);
 		});
 	}
 
