@@ -21,7 +21,7 @@ export default function LoginForm(){
 		}).catch((err) => {
 			console.log(`an error occured: ${err}`);
 			alert(`로그인 실패🥺. ${err}`);
-		});*/
+		});*/ 
 
 		axios.post(loginURL, {
 			"email": JSON.stringify({email}),
