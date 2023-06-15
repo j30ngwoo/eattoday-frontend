@@ -7,6 +7,7 @@ import { Divider, Button } from "@mui/joy";
 import RecommendedMenu from "components/RecommendedMenu";
 
 const selectURL = process.env.REACT_APP_API_URL + "preference/input";
+const recommendURL = process.env.REACT_APP_API_URL + "restaurant/recommend";
 
 export default function SelectPreferenceForm(){
 	const buttonRef = useRef(null);
@@ -17,6 +18,15 @@ export default function SelectPreferenceForm(){
 	const [isRecommended, setIsRecommended] = useState(false);
 	const [receivedEvent, setReceivedEvent] = useState('');
 
+	const getRecommend = () => {
+		axios.get(recommendURL)
+				.then((event) => {
+					setReceivedEvent(event.data);
+				}).catch((err) => {
+					alert(`추천 항목 수신 실패🥺. ${err}`);
+				});
+	}
+
 	const sendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
 			axios.post(selectURL, {
 				"preference1": JSON.stringify({region}),
@@ -25,7 +35,7 @@ export default function SelectPreferenceForm(){
 				"preference4": JSON.stringify({isWarm}),
 			}).then((event) => {
 				console.log('preference-received', event.data);
-				setReceivedEvent(event.data);
+				getRecommend();
 			}).catch((err) => {
 				console.log(`an error occured: ${err}`);
 				alert(`선호 항목 전송 실패🥺. ${err}`);
