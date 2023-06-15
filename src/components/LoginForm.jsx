@@ -15,6 +15,14 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
+		axios.get(loginURL, 'dummy'
+		).then((event) => {
+			console.log('dummy data sended!');
+		}).catch((err) => {
+			console.log(`an error occured: ${err}`);
+			alert(`로그인 실패🥺. ${err}`);
+		});
+
 		axios.post(loginURL, {
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
@@ -23,9 +31,6 @@ export default function LoginForm(){
 			localStorage.setItem("accessToken", event.data.accessToken);
 			localStorage.setItem("email", email);
 			navigate("/select");
-      // setLogin(true);
-      // setNickname('jeongwoo');
-      // navigate('/home');
     }).catch((err) => {
 			console.log(`an error occured: ${err}`);
 			alert(`로그인 실패🥺. ${err}`);

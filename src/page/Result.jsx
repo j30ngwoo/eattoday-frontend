@@ -1,34 +1,77 @@
-import {useState} from 'react';
-import styled from '@emotion/styled';
-import FlickingComponent from "@egjs/react-flicking";
+import React, { useState, useRef, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Input, Button } from "@mui/joy";
+import { gsap } from "gsap";
+import SplitType from "split-type";
+import axios from 'axios';
+import Modal from 'react-modal';
+import LoginForm from "components/LoginForm";
+import { styled } from 'styled-components';
 
-export default function Flicking(){
-  const [panels, setPanels] = useState([0, 1, 2, 3, 4]);
+export default function Login() {
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [pw, setPw] = useState("");
 
-  return (
-  <Container>
-    <FlickingComponent renderOnlyVisible={true}>
-      {panels.map(index => <Panel key={index}>{index + 1}</Panel>)}
-    </FlickingComponent>
-  </Container>
-  )
-};
+	const [isSent, setIsSent] = useState(false);
+	const emailPwRef = useRef(null);
+	const pageRef = useRef(null);
+	const buttonRef = useRef(null);
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 30rem;
-  position: relative;
-  width: 100%;
-  will-change: transform;
-  z-index: 1;
-  background-color: gray;
+	useEffect(() => {
+		const chars = new SplitType(emailPwRef.current).chars;
+
+		if (chars) {
+			gsap.fromTo(chars, {
+				scale: 0,
+				opacity: 0,
+			}, {
+				scale: 1,
+				opacity: 1,
+				stagger: 0.05,
+				ease: 'back'
+			})
+		}
+
+		if (pageRef.current.children) {	
+			gsap.fromTo(pageRef.current.children, 
+			{
+				opacity: 0,
+				y: 100,
+			},
+			{
+				opacity: 1,
+				y: 0,
+				stagger: 0.15,
+			}
+			);
+		}
+	}, [])
+
+	return (
+		<div className="container">
+			<Page ref={pageRef}>
+				<div className="eatToday">EatToday</div>
+				<div className="loginTitleWrap" ref={emailPwRef}>
+					오늘의 추천 메뉴!
+				</div>
+				<LoginForm />
+			</Page>
+		</div>
+	)
+}
+
+const Page = styled.div`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	max-width: 500px;
+	padding: 0 20px;
+	background-color: #F7F7F7;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 `
-
-const Panel = styled.div`
-  width: 30rem;
-  background-color: #f2a65e!important;
-  color: #fff!important;
-
-`
-
