@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react"
-import { useAsyncError, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { styled } from 'styled-components';
 import { gsap } from "gsap";
 import axios from 'axios';
-import { Input, Button } from "@mui/joy";
+import { Button } from "@mui/joy";
 
 const loginURL = process.env.REACT_APP_API_URL + "auth/login";
 

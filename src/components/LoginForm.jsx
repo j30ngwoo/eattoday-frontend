@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { useAsyncError, useNavigate } from "react-router-dom"
-import { styled } from 'styled-components';
+import { useNavigate } from "react-router-dom"
 import { gsap } from "gsap";
 import axios from 'axios';
 import { Input, Button } from "@mui/joy";
@@ -15,13 +14,14 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
-		axios.get(loginURL, 'dummy'
+		/*
+		axios.get(loginURL, {"dummy": "dummy"}
 		).then((event) => {
-			console.log('dummy data sended!');
+			console.log(`dummy data sended! ${event}`);
 		}).catch((err) => {
 			console.log(`an error occured: ${err}`);
 			alert(`로그인 실패🥺. ${err}`);
-		});
+		});*/
 
 		axios.post(loginURL, {
 			"email": JSON.stringify({email}),
@@ -33,7 +33,7 @@ export default function LoginForm(){
 			navigate("/select");
     }).catch((err) => {
 			console.log(`an error occured: ${err}`);
-			alert(`로그인 실패🥺. ${err}`);
+			alert(`로그인 실패🥺. 이메일과 비밀번호를 확인해주세요. ${err}`);
 		});
 	}
 

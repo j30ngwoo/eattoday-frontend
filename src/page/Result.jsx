@@ -1,22 +1,13 @@
 import React, { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Input, Button } from "@mui/joy";
 import { gsap } from "gsap";
 import SplitType from "split-type";
-import axios from 'axios';
-import Modal from 'react-modal';
 import LoginForm from "components/LoginForm";
 import { styled } from 'styled-components';
 
 export default function Login() {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState("");
-	const [pw, setPw] = useState("");
-
-	const [isSent, setIsSent] = useState(false);
 	const emailPwRef = useRef(null);
 	const pageRef = useRef(null);
-	const buttonRef = useRef(null);
 
 	useEffect(() => {
 		const chars = new SplitType(emailPwRef.current).chars;
