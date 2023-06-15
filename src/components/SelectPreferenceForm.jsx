@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import axios from 'axios';
 import { Button } from "@mui/joy";
 
-const loginURL = process.env.REACT_APP_API_URL + "auth/login";
+const selectURL = process.env.REACT_APP_API_URL + "/restaurant/recommend";
 
 export default function SelectPreferenceForm(){
 	const buttonRef = useRef(null);
@@ -15,7 +15,7 @@ export default function SelectPreferenceForm(){
 	const [isWarm, setIsWarm] = useState('');
 
 	const sendPreferenceToServer = (region, isHot, ingredient, isWarm) => {
-			axios.post(loginURL, {
+			axios.post(selectURL, {
 				"preference1": JSON.stringify({region}),
 				"preference2": JSON.stringify({isHot}),
 				"preference3": JSON.stringify({ingredient}),
