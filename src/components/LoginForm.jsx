@@ -61,8 +61,6 @@ export default function LoginForm(){
 				아직 회원이 아니신가요?&nbsp;
 				<div className="textToRegisterPage" onClick={() => navigate("/register")}>회원가입</div>
 			</center>
-			<Button onClick={() => localStorage.setItem('accessToken', 'a')} />
-			<Button onClick={() => localStorage.removeItem('accessToken')} />
 		</>
 	)
 }
