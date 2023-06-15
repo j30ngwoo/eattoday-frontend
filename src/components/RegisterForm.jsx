@@ -21,7 +21,7 @@ export default function RegisterForm(){
 		axios.post(signupURL, {
 			"email": JSON.stringify({email}),
 			"password": JSON.stringify({pw})
-		}).then((event) => {
+		}).then((event) => { 
       console.log('received', event.data.email);
       alert("회원가입 성공! ", event.data.email);
       navigate('/login');
