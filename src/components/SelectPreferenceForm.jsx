@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import axios from 'axios';
 import { Button } from "@mui/joy";
 
-const selectURL = process.env.REACT_APP_API_URL + "/restaurant/recommend";
+const selectURL = process.env.REACT_APP_API_URL + "restaurant/recommend";
 
 export default function SelectPreferenceForm(){
 	const buttonRef = useRef(null);
