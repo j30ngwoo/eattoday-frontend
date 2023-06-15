@@ -20,6 +20,8 @@ export default function SelectPreferenceForm(){
 				"preference2": JSON.stringify({isHot}),
 				"preference3": JSON.stringify({ingredient}),
 				"preference4": JSON.stringify({isWarm}),
+			}, {
+				headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
 			}).then((event) => {
 				console.log('preference-received', event.data);
 			}).catch((err) => {
