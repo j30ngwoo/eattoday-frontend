@@ -42,7 +42,7 @@ export default function SelectPreference() {
 		<div className="container">
 			<Page ref={pageRef}>
 				<div className="eatToday">EatToday</div>
-				<div className="loginTitleWrap" ref={emailPwRef}>
+				<div className="selectTitleWrap" ref={emailPwRef}>
 					오늘의 선호를
 					<br/>
 					선택해주세요😋

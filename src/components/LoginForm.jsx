@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import axios from 'axios';
 import { Input, Button } from "@mui/joy";
 
+
 const loginURL = process.env.REACT_APP_API_URL + "auth/login";
 
 export default function LoginForm(){
@@ -14,14 +15,14 @@ export default function LoginForm(){
 	const [pw, setPw] = useState("");
 
 	const sendServerToLogin = (email, pw) => {
-		
+		/*
 		axios.get(loginURL)
 		.then((event) => {
-			console.log(`dummy data sended! ${event}`);
+			console.log(`login get event ${event}`);
 		}).catch((err) => {
 			console.log(`an error occured: ${err}`);
 			alert(`로그인 실패🥺. ${err}`);
-		});
+		});*/
 
 		axios.post(loginURL, {
 			"email": JSON.stringify({email}),

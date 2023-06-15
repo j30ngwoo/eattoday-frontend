@@ -43,6 +43,13 @@
 	color: #262626;
 }
 
+.selectTitleWrap {
+	margin-top: 8%;
+	font-size: 30px;
+	font-weight: 700;
+	color: #262626;
+}
+
 .textToRegisterPage {
 	text-decoration : underline;
 	display: inline-block;

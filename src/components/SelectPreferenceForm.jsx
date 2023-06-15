@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import axios from 'axios';
 import { Divider, Button } from "@mui/joy";
 import RecommendedMenu from "components/RecommendedMenu";
+import SplitType from "split-type";
 
 const selectURL = process.env.REACT_APP_API_URL + "preference/input";
 const recommendURL = process.env.REACT_APP_API_URL + "restaurant/recommend";
