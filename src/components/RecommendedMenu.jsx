@@ -1,6 +1,6 @@
 import { Card, CardOverflow, Typography, AspectRatio } from '@mui/joy';
 
-function SomeExample(props){
+function TestExample(props){
 	if (props.name === "시홍쓰"){
 		return (
 			<CardOverflow>
@@ -9,6 +9,8 @@ function SomeExample(props){
 						src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20201230_249%2F1609305244229oMcmW_JPEG%2Fu8YvvJEtaPZQVtbZp8sU_qdD.jpeg.jpg"
 						loading="lazy"
 						alt=""
+						onClick={() => {window.open("https://map.naver.com/v5/search/%EC%8B%9C%ED%99%8D%EC%93%B0/place/1494321970?entry=plt&c=15,0,0,0,dh&isCorrectAnswer=true")}}
+						style={{cursor: "pointer"}}
 					/>
 				</AspectRatio>
 			</CardOverflow>
@@ -29,7 +31,7 @@ function SomeExample(props){
 export default function RecommendedMenu(props){
 	return (
 		<Card variant="outlined">
-			<SomeExample name={props.data.name}/>
+			<TestExample name={props.data.name}/>
 			<Typography level="h2">{props.data.name}</Typography>
 			<Typography level="h2" fontSize="md">{props.data.explanation}</Typography>
 		</Card>
